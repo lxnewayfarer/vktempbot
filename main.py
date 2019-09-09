@@ -6,7 +6,7 @@ import requests
 from bs4 import BeautifulSoup
 import urllib.request
 
-TOKEN = "" 
+TOKEN = "1b1913642994dc307be4dbc7e8330583371bb7319ac3182f1b21ab61165e1624dc037b4029c9f95a3cdd3" 
 
 
 class MessageHandler():
