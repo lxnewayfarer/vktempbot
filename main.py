@@ -5,16 +5,14 @@ import random
 import requests
 from bs4 import BeautifulSoup
 import urllib.request
-
-TOKEN = "1b1913642994dc307be4dbc7e8330583371bb7319ac3182f1b21ab61165e1624dc037b4029c9f95a3cdd3" 
-
+from configs import *
 
 class MessageHandler():
     def __init__(self):
         self.token = TOKEN
         self.vk_session = vk_api.VkApi(token=self.token)
         self.vk = self.vk_session.get_api()
-        self.longpoll = VkBotLongPoll(self.vk_session, '182547297')
+        self.longpoll = VkBotLongPoll(self.vk_session, GROUP_ID)
 
     def getLink(self, text):
         url = 'https://yandex.ru/pogoda/search?request=' + text
@@ -46,14 +44,11 @@ class MessageHandler():
     
     def run(self):  
         for event in self.longpoll.listen():
-            
             if event.type == VkBotEventType.MESSAGE_NEW:
                 print('•  Для меня от: ', end='')
                 user_id = event.obj.from_id
                 print(user_id)
                 text = event.obj.text
-                if text == 'stopbot3294':
-                    return
                 print('Текст: ', text)
                 try:
                     infoList = self.getLink(text)
